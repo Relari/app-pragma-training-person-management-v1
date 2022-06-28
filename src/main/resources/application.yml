@@ -1,0 +1,19 @@
+application:
+  http-client:
+    person:
+      base-url: http://localhost:8081/application/pragma/training/v1/
+
+server:
+  port: 9020
+  error:
+    include-message: always
+
+logging:
+  level:
+    com.co.pragma.training.service.app: TRACE
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 25MB
+      max-request-size: 25MB
