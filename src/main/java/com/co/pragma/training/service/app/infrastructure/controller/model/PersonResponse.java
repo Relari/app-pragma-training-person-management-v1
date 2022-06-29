@@ -1,19 +1,24 @@
 
 package com.co.pragma.training.service.app.infrastructure.controller.model;
 
-import lombok.Data;
+import lombok.*;
 
 /**
- * <b>Class:</b> PersonRequest.
+ * <b>Class:</b> PersonResponse.
  * <b>Company:</b> PRAGMA SOLUCIONES TECNOL&Oacute;GICAS PERU S.A.C.
  *
  * @author RLR
  * @version 1.0.0
  */
 
-@Data
-public class PersonRequest {
+@Builder
+@Getter
+@ToString
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+public class PersonResponse {
 
+    private Long id;
     private String names;
     private String lastNames;
     private String sex;
@@ -21,5 +26,5 @@ public class PersonRequest {
     private String cityBirth;
     private String identificationType;
     private String identificationNumber;
-
+    private ImageResponse image;
 }

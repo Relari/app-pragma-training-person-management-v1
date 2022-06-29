@@ -1,12 +1,14 @@
 package com.co.pragma.training.service.app.infrastructure.controller.mapper;
 
+import static com.co.pragma.training.service.app.util.PersonManagementUtil.convertBase64;
+
 import com.co.pragma.training.service.app.domain.Image;
 import com.co.pragma.training.service.app.domain.Person;
+import com.co.pragma.training.service.app.infrastructure.controller.model.ImageResponse;
 import com.co.pragma.training.service.app.infrastructure.controller.model.PersonRequest;
+import com.co.pragma.training.service.app.infrastructure.controller.model.PersonResponse;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-
-import java.util.Base64;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class PersonMapper {
@@ -28,12 +30,21 @@ public class PersonMapper {
                 .build();
     }
 
-    private static String convertBase64(byte[] bytes) {
-        return Base64.getEncoder().encodeToString(bytes);
-    }
-
-    private static byte[] decodeBase64(String base64String) {
-        return Base64.getDecoder().decode(base64String);
+    public static PersonResponse mapPersonResponse(Person person) {
+        return PersonResponse.builder()
+                .id(person.getId())
+                .names(person.getNames())
+                .lastNames(person.getLastNames())
+                .sex(person.getSex())
+                .age(person.getAge())
+                .cityBirth(person.getCityBirth())
+                .identificationType(person.getIdentificationType())
+                .identificationNumber(person.getIdentificationNumber())
+                .image(new ImageResponse(
+                        person.getImage().getId(),
+                        person.getImage().getContent())
+                )
+                .build();
     }
 
 }
