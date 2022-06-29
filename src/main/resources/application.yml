@@ -1,3 +1,11 @@
+spring:
+  application:
+    name: '@project.artifactId@'
+  servlet:
+    multipart:
+      max-file-size: 25MB
+      max-request-size: 25MB
+
 application:
   http-client:
     person:
@@ -12,8 +20,7 @@ logging:
   level:
     com.co.pragma.training.service.app: TRACE
 
-spring:
-  servlet:
-    multipart:
-      max-file-size: 25MB
-      max-request-size: 25MB
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: 'http://localhost:8090/eureka/'
