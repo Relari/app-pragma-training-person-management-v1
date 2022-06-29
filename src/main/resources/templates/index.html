@@ -16,57 +16,39 @@
   </head>
   <body>
 
-    <div class="container pt-5">
+    <div class="container">
+        <div class="form-group text-center">
+            <img src="https://www.worldpacificcompany.com/wp-content/uploads/2019/04/logo-wpc.png" class="img-fluid" alt="...">
+        </div>
+        <form action="" th:action="@{/login}" method="post">
+            <div class="row form-group">
+                <div class="col-2">
+                    <label for="username">Usuario</label>
+                </div>
+                <div class="col-4">
+                    <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
+                </div>
 
-        <form action="#" th:action="@{/register}" method="post" th:object="${person}" enctype="multipart/form-data">
-
-            <div class="form-group">
-                <label class="form-label">Full name:</label>
-                <input type="text" class="form-control" th:field="*{names}" />
+                <div class="col-2">
+                    <label for="password">Contrasenia</label>
+                </div>
+                <div class="col-4">
+                    <input type="text" class="form-control" id="password" name="password" aria-describedby="emailHelp">
+                </div>
             </div>
 
             <div class="form-group">
-                <label class="form-label">LastNames:</label>
-                <input type="text" class="form-control" th:field="*{lastNames}" />
+                <button type="submit" class="form-control btn btn-primary">Iniciar Sesion</button>
             </div>
 
-            <div class="form-group">
-                <label class="form-label">Age:</label>
-                <input type="text" class="form-control" th:field="*{age}" />
+            <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                Invalid username and password.
             </div>
-
-            <div class="form-group">
-                <label class="form-label">sex:</label>
-                <select class="form-control" th:field="*{sex}">
-                    <option value="M">Male</option>
-                    <option value="F">Female</option>
-                </select>
+            <div th:if="${param.logout}" class="alert alert-success" role="alert">
+                You have been logged out.
             </div>
-
-            <div class="form-group">
-                <label class="form-label">CityOfBirth:</label>
-                <input type="text" class="form-control" th:field="*{cityBirth}" />
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">Document Type:</label>
-                <input type="text" class="form-control" th:field="*{identificationType}" />
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">Document Number:</label>
-                <input type="text" class="form-control" th:field="*{identificationNumber}" />
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">Ingresa tu foto:</label>
-                <input type="file" class="form-control-file" name="file" />
-            </div>
-
-            <button type="submit" class="btn btn-primary d-flex align-content-center ">Register</button>
         </form>
     </div>
-
 
     <!-- Optional JavaScript; choose one of the two! -->
 
