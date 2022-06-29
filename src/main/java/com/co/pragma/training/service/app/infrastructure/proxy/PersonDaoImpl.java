@@ -10,7 +10,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -51,7 +53,7 @@ public class PersonDaoImpl implements PersonDao {
 
         try {
 
-            personResponse = personApi.findAll(queryParams)
+            personResponse = personApi.findPersonByDocument(queryParams)
                     .execute()
                     .body();
 
@@ -61,6 +63,27 @@ public class PersonDaoImpl implements PersonDao {
 
         assert personResponse != null;
         return PersonMapper.mapPerson(personResponse);
+    }
+
+    @Override
+    public List<Person> getPeopleByAgeOlder(Integer age) {
+        List<PersonResponse> personResponses = null;
+
+        try {
+
+            personResponses = personApi.getPeopleByAgeOlder(age)
+                    .execute()
+                    .body();
+
+        } catch (IOException e) {
+            log.error(e.getMessage(), e);
+        }
+
+//        assert personResponses != null;
+        return personResponses
+                .stream()
+                .map(PersonMapper::mapPerson)
+                .collect(Collectors.toList());
     }
 
 
