@@ -1,10 +1,10 @@
 
-package com.co.pragma.training.service.app.infrastructure.proxy.model;
+package com.co.pragma.training.service.app.infrastructure.proxy.model.person;
 
 import lombok.*;
 
 /**
- * <b>Class:</b> PersonRequest.
+ * <b>Class:</b> PersonResponse.
  * <b>Company:</b> PRAGMA SOLUCIONES TECNOL&Oacute;GICAS PERU S.A.C.
  *
  * @author RLR
@@ -16,8 +16,9 @@ import lombok.*;
 @ToString
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class PersonRequest {
+public class PersonResponse {
 
+    private Long id;
     private String names;
     private String lastNames;
     private String sex;
@@ -25,6 +26,5 @@ public class PersonRequest {
     private String cityBirth;
     private String identificationType;
     private String identificationNumber;
-    private ImageRequest image;
-
+    private ImageResponse image;
 }

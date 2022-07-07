@@ -7,9 +7,12 @@ import com.co.pragma.training.service.app.application.usecase.PersonManagementSe
 import com.co.pragma.training.service.app.application.usecase.impl.PersonManagementCreateServiceImpl;
 import com.co.pragma.training.service.app.application.usecase.impl.PersonManagementSearchOlderAgesServiceImpl;
 import com.co.pragma.training.service.app.application.usecase.impl.PersonManagementSearchServiceImpl;
+import com.co.pragma.training.service.app.infrastructure.proxy.config.HeaderApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Lazy
 @Configuration
@@ -31,6 +34,16 @@ public class SpringConfiguration {
     public PersonManagementSearchOlderAgesService personManagementSearchOlderAgesService(
             PersonDao personDao) {
         return new PersonManagementSearchOlderAgesServiceImpl(personDao);
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public HeaderApplication dataMemory() {
+        return new HeaderApplication();
     }
 
 }

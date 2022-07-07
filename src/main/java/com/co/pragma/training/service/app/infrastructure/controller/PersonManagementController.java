@@ -19,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 @Slf4j
@@ -32,9 +31,14 @@ public class PersonManagementController {
 
     private final PersonManagementSearchOlderAgesService personManagementSearchOlderAgesService;
 
-    @GetMapping("/")
+    @GetMapping({"/", "/login"})
     public String index(Model model) {
         return "index";
+    }
+
+    @GetMapping("/logout")
+    public String logoutPage() {
+        return "redirect:/login?logout";
     }
 
     @GetMapping("/register")

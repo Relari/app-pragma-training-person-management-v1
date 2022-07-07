@@ -8,6 +8,8 @@ spring:
 
 application:
   http-client:
+    jwt-token:
+      base-url: http://localhost:8080/auth/jwt/v1/
     person:
       base-url: http://localhost:8081/application/pragma/training/v1/
 

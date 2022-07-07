@@ -1,5 +1,6 @@
 package com.co.pragma.training.service.app.infrastructure.proxy.config;
 
+import com.co.pragma.training.service.app.infrastructure.proxy.api.JwtTokenApi;
 import com.co.pragma.training.service.app.infrastructure.proxy.api.PersonApi;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -20,10 +21,13 @@ public class RestConfiguration {
     @Value("${application.http-client.person.base-url}")
     private String personUri;
 
+    @Value("${application.http-client.jwt-token.base-url}")
+    private String jwtTokenUri;
+
     @Value("${logging.level.com.co.pragma.training.service.app}")
     private String levelLogApp;
 
-    private Retrofit retrofit() {
+    private Retrofit retrofit(String baseUrl) {
 
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         validateLoggingLevel(logging);
@@ -32,7 +36,7 @@ public class RestConfiguration {
         httpClient.addInterceptor(logging);
 
         return new Retrofit.Builder()
-                .baseUrl(personUri)
+                .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(httpClient.build())
                 .build();
@@ -54,7 +58,12 @@ public class RestConfiguration {
 
     @Bean
     public PersonApi personApi() {
-        return retrofit().create(PersonApi.class);
+        return retrofit(personUri).create(PersonApi.class);
+    }
+
+    @Bean
+    public JwtTokenApi jwtTokenApi() {
+        return retrofit(jwtTokenUri).create(JwtTokenApi.class);
     }
 
 }

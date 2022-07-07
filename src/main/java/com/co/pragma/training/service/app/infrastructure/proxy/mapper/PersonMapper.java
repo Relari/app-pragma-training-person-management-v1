@@ -2,10 +2,9 @@ package com.co.pragma.training.service.app.infrastructure.proxy.mapper;
 
 import com.co.pragma.training.service.app.domain.Image;
 import com.co.pragma.training.service.app.domain.Person;
-import com.co.pragma.training.service.app.infrastructure.proxy.model.ImageResponse;
-import com.co.pragma.training.service.app.infrastructure.proxy.model.PersonRequest;
-import com.co.pragma.training.service.app.infrastructure.proxy.model.ImageRequest;
-import com.co.pragma.training.service.app.infrastructure.proxy.model.PersonResponse;
+import com.co.pragma.training.service.app.infrastructure.proxy.model.person.PersonRequest;
+import com.co.pragma.training.service.app.infrastructure.proxy.model.person.ImageRequest;
+import com.co.pragma.training.service.app.infrastructure.proxy.model.person.PersonResponse;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

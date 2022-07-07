@@ -2,9 +2,10 @@ package com.co.pragma.training.service.app.infrastructure.proxy;
 
 import com.co.pragma.training.service.app.application.dao.PersonDao;
 import com.co.pragma.training.service.app.domain.Person;
+import com.co.pragma.training.service.app.infrastructure.proxy.config.HeaderApplication;
 import com.co.pragma.training.service.app.infrastructure.proxy.api.PersonApi;
 import com.co.pragma.training.service.app.infrastructure.proxy.mapper.PersonMapper;
-import com.co.pragma.training.service.app.infrastructure.proxy.model.PersonResponse;
+import com.co.pragma.training.service.app.infrastructure.proxy.model.person.PersonResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 public class PersonDaoImpl implements PersonDao {
 
     private final PersonApi personApi;
+    private final HeaderApplication headerApplication;
 
     @Override
     public void save(Person person) {
@@ -28,7 +30,8 @@ public class PersonDaoImpl implements PersonDao {
 
         try {
 
-            var isProcess = personApi.save(personRequest)
+            var isProcess = personApi.save(
+                    headerApplication.buildBearerToken(), personRequest)
                     .execute()
                     .isSuccessful();
 
@@ -53,7 +56,8 @@ public class PersonDaoImpl implements PersonDao {
 
         try {
 
-            personResponse = personApi.findPersonByDocument(queryParams)
+            personResponse = personApi.findPersonByDocument(
+                    headerApplication.buildBearerToken(), queryParams)
                     .execute()
                     .body();
 
@@ -71,7 +75,8 @@ public class PersonDaoImpl implements PersonDao {
 
         try {
 
-            personResponses = personApi.getPeopleByAgeOlder(age)
+            personResponses = personApi.getPeopleByAgeOlder(
+                    headerApplication.buildBearerToken(), age)
                     .execute()
                     .body();
 
@@ -79,7 +84,6 @@ public class PersonDaoImpl implements PersonDao {
             log.error(e.getMessage(), e);
         }
 
-//        assert personResponses != null;
         return personResponses
                 .stream()
                 .map(PersonMapper::mapPerson)
